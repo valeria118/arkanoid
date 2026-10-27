@@ -139,7 +139,7 @@ let H = 600;                // высота подстраивается под 
 
 // мобильная версия: немного быстрее мяч и платформа
 const IS_MOBILE = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || matchMedia('(pointer:coarse)').matches;
-const SPD = IS_MOBILE ? 1.5 : 1;   // ускорение мяча
+const SPD = IS_MOBILE ? 1.8 : 1;   // ускорение мяча
 const PSPD = IS_MOBILE ? 1.25 : 1; // ускорение платформы
 const overlay = document.getElementById('overlay');
 
