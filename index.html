@@ -139,7 +139,7 @@ let H = 600;                // высота подстраивается под 
 
 // мобильная версия: немного быстрее мяч и платформа
 const IS_MOBILE = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || matchMedia('(pointer:coarse)').matches;
-const SPD = IS_MOBILE ? 1.3 : 1;   // ускорение мяча
+const SPD = IS_MOBILE ? 1.5 : 1;   // ускорение мяча
 const PSPD = IS_MOBILE ? 1.25 : 1; // ускорение платформы
 const overlay = document.getElementById('overlay');
 
@@ -222,10 +222,10 @@ document.querySelectorAll('.ctrl button').forEach(b=>{
 
 // ---------- config (зависит от экрана: на телефоне блоков больше) ----------
 const PW = 110, PH = 14, BR = 8, GAP = 6, TOP = 60;
-const BW = IS_MOBILE ? 46 : 62;                 // мельче блоки на телефоне
-const BH = IS_MOBILE ? 20 : 24;
+const BW = IS_MOBILE ? 38 : 62;                 // мельче блоки на телефоне
+const BH = IS_MOBILE ? 17 : 24;
 const COLS = Math.floor((W - 48) / (BW + GAP)); // и их влезает больше
-const ROWS = IS_MOBILE ? 7 : 6;
+const ROWS = IS_MOBILE ? 8 : 6;
 const GRID_X = Math.round((W - (COLS*(BW+GAP) - GAP)) / 2); // сетка по центру
 const BONUS_TYPES = [
   {id:'wide',  color:'#66bb6a', label:'W'},
@@ -542,12 +542,12 @@ function draw(){
     ctx.fillStyle=theme.shine;
     ctx.beginPath(); ctx.roundRect(br.x+2,br.y+2,BW-4,7,4); ctx.fill();
     if(br.bonus){
-      ctx.fillStyle='rgba(255,255,255,.95)'; ctx.font=`700 ${IS_MOBILE?9:11}px Rubik`; ctx.textAlign='center';
-      ctx.fillText(br.bonus.label, br.x+BW/2, br.y+BH/2+4);
+      ctx.fillStyle='rgba(255,255,255,.95)'; ctx.font=`700 ${IS_MOBILE?8:11}px Rubik`; ctx.textAlign='center';
+      ctx.fillText(br.bonus.label, br.x+BW/2, br.y+BH/2+3);
     }
     if(br.hp>1){
-      ctx.fillStyle='rgba(255,255,255,.85)'; ctx.font=`700 ${IS_MOBILE?8:10}px Rubik`; ctx.textAlign='left';
-      ctx.fillText(br.hp, br.x+4, br.y+12);
+      ctx.fillStyle='rgba(255,255,255,.85)'; ctx.font=`700 ${IS_MOBILE?7:10}px Rubik`; ctx.textAlign='left';
+      ctx.fillText(br.hp, br.x+3, br.y+10);
     }
   });
 
