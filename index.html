@@ -65,7 +65,7 @@
     box-shadow:0 2px 8px var(--shadow);
   }
   #pauseBtn:active { transform:scale(.9); background:var(--accent); color:#fff; }
-  @media (pointer:coarse) { #pauseBtn { display:block; } }
+  @media (pointer:coarse) { body.playing #pauseBtn { display:block; } }
 
   #overlay {
     position:absolute; inset:10px 10px 6px 10px; display:flex; flex-direction:column;
@@ -502,6 +502,7 @@ function applyBonus(t){
 
 function gameOver(win){
   playing=false;
+  document.body.classList.remove('playing');
   showOverlay(
     win ? 'Победа! 🏆' : 'Игра окончена',
     `Очки: ${score} · Уровень: ${level}<br>${win?'Все 5 уровней пройдены!':'Удачи в следующий раз!'}`,
@@ -636,6 +637,7 @@ function showOverlay(title,text,btn){
 document.getElementById('startBtn').onclick=()=>{
   overlay.style.display='none';
   reset(true); playing=true; paused=false;
+  document.body.classList.add('playing');
   beep(600,.1,'triangle');
 };
 
