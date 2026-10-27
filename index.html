@@ -40,8 +40,8 @@
     border:2.5px solid transparent; cursor:pointer; transition:.15s;
   }
   #themes button.sel { border-color:var(--text); transform:scale(1.12); }
-  /* во время игры темы заблокированы */
-  body.playing #themes { opacity:.35; pointer-events:none; }
+  /* во время игры темы скрыты */
+  body.playing #themes { display:none; }
   /* --- игровое поле занимает всё место --- */
   #wrap {
     position:relative; flex:1 1 auto; width:100%; min-height:0;
