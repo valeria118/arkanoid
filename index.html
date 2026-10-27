@@ -222,9 +222,9 @@ document.querySelectorAll('.ctrl button').forEach(b=>{
 
 // ---------- config (зависит от экрана: на телефоне блоков больше) ----------
 const PW = 110, PH = 14, BR = 8, GAP = 6;
-const BW = IS_MOBILE ? 44 : 62;                 // крупнее блоки на телефоне
-const BH = IS_MOBILE ? 22 : 24;
-const COLS = Math.floor((W - 48) / (BW + GAP)); // ~14 колонок
+const BW = IS_MOBILE ? 52 : 62;                 // крупнее блоки на телефоне
+const BH = IS_MOBILE ? 28 : 24;
+const COLS = Math.floor((W - 48) / (BW + GAP)); // ~12 колонок
 const ROWS = IS_MOBILE ? 10 : 6;                // рядов больше — сетка уходит ниже
 const GRID_Y = IS_MOBILE ? 100 : 60;            // старт сетки ниже на телефоне
 const GRID_X = Math.round((W - (COLS*(BW+GAP) - GAP)) / 2); // сетка по центру
@@ -543,12 +543,12 @@ function draw(){
     ctx.fillStyle=theme.shine;
     ctx.beginPath(); ctx.roundRect(br.x+2,br.y+2,BW-4,7,4); ctx.fill();
     if(br.bonus){
-      ctx.fillStyle='rgba(255,255,255,.95)'; ctx.font=`700 ${IS_MOBILE?8:11}px Rubik`; ctx.textAlign='center';
-      ctx.fillText(br.bonus.label, br.x+BW/2, br.y+BH/2+3);
+      ctx.fillStyle='rgba(255,255,255,.95)'; ctx.font=`700 ${IS_MOBILE?10:11}px Rubik`; ctx.textAlign='center';
+      ctx.fillText(br.bonus.label, br.x+BW/2, br.y+BH/2+4);
     }
     if(br.hp>1){
-      ctx.fillStyle='rgba(255,255,255,.85)'; ctx.font=`700 ${IS_MOBILE?7:10}px Rubik`; ctx.textAlign='left';
-      ctx.fillText(br.hp, br.x+3, br.y+10);
+      ctx.fillStyle='rgba(255,255,255,.85)'; ctx.font=`700 ${IS_MOBILE?9:10}px Rubik`; ctx.textAlign='left';
+      ctx.fillText(br.hp, br.x+4, br.y+13);
     }
   });
 
