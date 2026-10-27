@@ -285,7 +285,7 @@ function buildLevel(n){
       hp: steel ? Infinity : Math.min(1 + Math.floor(n/3) + Math.floor((ROWS-1-r)/3), 3),
       color: theme.bricks[(r+n)%theme.bricks.length],
       steel,
-      bonus: (!steel && Math.random()<0.13) ? BONUS_TYPES[Math.floor(Math.random()*BONUS_TYPES.length)] : null,
+      bonus: (!steel && Math.random()<0.3) ? BONUS_TYPES[Math.floor(Math.random()*BONUS_TYPES.length)] : null,
     });
     if(move){
       bricks[bricks.length-1].vx = move;
