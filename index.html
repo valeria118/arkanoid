@@ -112,6 +112,11 @@
 const cv = document.getElementById('c'), ctx = cv.getContext('2d');
 const W = 760;              // логическая ширина фиксирована
 let H = 600;                // высота подстраивается под экран
+
+// мобильная версия: немного быстрее мяч и платформа
+const IS_MOBILE = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || matchMedia('(pointer:coarse)').matches;
+const SPD = IS_MOBILE ? 1.2 : 1;   // ускорение мяча
+const PSPD = IS_MOBILE ? 1.25 : 1; // ускорение платформы
 const overlay = document.getElementById('overlay');
 
 // ---------- темы ----------
@@ -313,7 +318,7 @@ new ResizeObserver(fitCanvas).observe(cv);
 requestAnimationFrame(fitCanvas);
 
 function fire(){
-  const b=balls[0], sp=diffSpeed(level);
+  const b=balls[0], sp=diffSpeed(level)*SPD;
   const ang=(Math.random()*.6-.3);
   b.stuck=false; b.vx=sp*Math.sin(ang); b.vy=-sp*Math.cos(ang);
   launch=false; beep(500,.08,'triangle');
@@ -341,12 +346,12 @@ function update(){
   // платформа — только выбранный способ управления
   if(controlMode==='mouse'){
     const tx = mouseX - paddle.w/2;
-    paddle.x += (tx-paddle.x)*0.14;
+    paddle.x += (tx-paddle.x) * (IS_MOBILE ? 0.22 : 0.14);
     paddleVX = 0;
   } else {
     const left = keys['ArrowLeft']||keys['KeyA'], right = keys['ArrowRight']||keys['KeyD'];
-    if(left)  paddleVX = Math.max(paddleVX-0.3, -5);
-    else if(right) paddleVX = Math.min(paddleVX+0.3, 5);
+    if(left)  paddleVX = Math.max(paddleVX-0.3*PSPD, -5*PSPD);
+    else if(right) paddleVX = Math.min(paddleVX+0.3*PSPD, 5*PSPD);
     else paddleVX *= 0.94;
     paddle.x += paddleVX;
   }
@@ -374,7 +379,7 @@ function update(){
     const py=H-40;
     if(b.vy>0 && b.y+BR>py && b.y+BR<py+PH+12 && b.x>paddle.x-BR && b.x<paddle.x+paddle.w+BR){
       const rel=((b.x-(paddle.x+paddle.w/2))/(paddle.w/2));
-      const sp=Math.min(Math.hypot(b.vx,b.vy)*1.02, diffMaxSp(level));
+      const sp=Math.min(Math.hypot(b.vx,b.vy)*1.02, diffMaxSp(level)*SPD);
       const ang=rel*1.05;
       b.vx=sp*Math.sin(ang); b.vy=-Math.abs(sp*Math.cos(ang));
       b.y=py-BR;
