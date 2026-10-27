@@ -221,11 +221,12 @@ document.querySelectorAll('.ctrl button').forEach(b=>{
 });
 
 // ---------- config (зависит от экрана: на телефоне блоков больше) ----------
-const PW = 110, PH = 14, BR = 8, GAP = 6, TOP = 60;
-const BW = IS_MOBILE ? 38 : 62;                 // мельче блоки на телефоне
-const BH = IS_MOBILE ? 17 : 24;
-const COLS = Math.floor((W - 48) / (BW + GAP)); // и их влезает больше
-const ROWS = IS_MOBILE ? 8 : 6;
+const PW = 110, PH = 14, BR = 8, GAP = 6;
+const BW = IS_MOBILE ? 44 : 62;                 // крупнее блоки на телефоне
+const BH = IS_MOBILE ? 22 : 24;
+const COLS = Math.floor((W - 48) / (BW + GAP)); // ~14 колонок
+const ROWS = IS_MOBILE ? 10 : 6;                // рядов больше — сетка уходит ниже
+const GRID_Y = IS_MOBILE ? 100 : 60;            // старт сетки ниже на телефоне
 const GRID_X = Math.round((W - (COLS*(BW+GAP) - GAP)) / 2); // сетка по центру
 const BONUS_TYPES = [
   {id:'wide',  color:'#66bb6a', label:'W'},
@@ -280,7 +281,7 @@ function buildLevel(n){
     }
     if(skip) continue;
     bricks.push({
-      x: GRID_X + c*(BW+GAP), y: TOP + r*(BH+GAP),
+      x: GRID_X + c*(BW+GAP), y: GRID_Y + r*(BH+GAP),
       hp: steel ? Infinity : Math.min(1 + Math.floor(n/3) + Math.floor((ROWS-1-r)/3), 3),
       color: theme.bricks[(r+n)%theme.bricks.length],
       steel,
