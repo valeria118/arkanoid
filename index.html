@@ -40,6 +40,8 @@
     border:2.5px solid transparent; cursor:pointer; transition:.15s;
   }
   #themes button.sel { border-color:var(--text); transform:scale(1.12); }
+  /* во время игры темы заблокированы */
+  body.playing #themes { opacity:.35; pointer-events:none; }
   /* --- игровое поле занимает всё место --- */
   #wrap {
     position:relative; flex:1 1 auto; width:100%; min-height:0;
@@ -195,7 +197,7 @@ Object.entries(THEMES).forEach(([key,th])=>{
   const b = document.createElement('button');
   b.title = th.name; b.dataset.t = key;
   b.style.background = th.dot;
-  b.onclick = ()=>{ applyTheme(key); beep(700,.05,'triangle',.06); };
+  b.onclick = ()=>{ if(!playing){ applyTheme(key); beep(700,.05,'triangle',.06); } else beep(200,.05,'square',.05); };
   themesBox.appendChild(b);
 });
 applyTheme('light');
